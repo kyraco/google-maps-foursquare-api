@@ -1,0 +1,53 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Katoomba - Popular spots</title>
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+    <div class="off-canvas-wrapper">
+        <div class="off-canvas-wrapper-inner" data-off-canvas-wrapper>
+            <div class="off-canvas position-left reveal-for-medium" id="offCanvasLeft" data-off-canvas>                
+                <!-- filter input -->
+                <form data-bind="submit: filterByKeyword">
+                    <div class="input-group">
+                      <input data-bind="value: keyword" class="input-group-field" placeholder="keyword(s)" type="text">
+                      <div class="input-group-button">
+                        <input type="submit" class="button secondary" value="Filter">
+                      </div>
+                    </div>
+                </form>
+                <!-- filter list -->
+                <div data-bind="foreach: filteredList">
+                    <div data-bind="click: $root.focusVenue" class="filter-item">
+                        <span data-bind="text: rating" class="badge rating"></span>
+                        <h3 data-bind="text: name"></h3>
+                        <span data-bind="text: category" class="label secondary"></span>
+                        <p data-bind="text: formattedAddress"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="off-canvas-content" data-off-canvas-content>
+                <!-- error div -->
+                <div data-bind="if: errorFound"><div id="alert" class="alert callout"><h5>There was an error loading the API data.</h5><p>Please refresh the page to try again...</p></div></div>
+                <button class="button settings show-for-small-only" type="button" data-toggle="offCanvasLeft" aria-expanded="false" aria-controls="offCanvasLeft">Settings</button>
+                <span data-bind="text: location" class="label location"></span>
+                <!-- map canvas -->
+                <div id="map" class="map"></div>
+            </div>
+        </div>
+    </div>
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/knockout.js"></script>
+    <script src="js/vendor/foundation.min.js"></script>
+    <script src="js/app.js"></script>
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAVPfpNJPhapQ-ULuWe76RPQsZFEqE6mH4&callback=initMap" onerror="googleError()"></script>
+</body>
+
+</html>
